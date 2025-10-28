@@ -184,8 +184,8 @@ export default function Home() {
                 theme === "dark" ? "text-neutral-400" : "text-neutral-600"
               }`}
             >
-              Software Engineer specializing in distributed systems, cloud
-              architecture, and full-stack development
+              Software Engineer specializing in distributed systems, Agentic AI
+              systems and full-stack development
             </motion.p>
           </motion.div>
 
@@ -207,21 +207,20 @@ export default function Home() {
             >
               View Projects
             </motion.button>
-            <motion.button
+            <motion.a
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => {
-                const element = document.getElementById("contact");
-                element?.scrollIntoView({ behavior: "smooth" });
-              }}
+              download
+              href="https://docs-mahesh.s3.us-east-1.amazonaws.com/Mahesh_Reddy_Changal.pdf"
+              target="_blank"
               className={`px-8 py-4 rounded-xl font-medium transition-colors ${
                 theme === "dark"
                   ? "bg-neutral-800/50 text-white border border-neutral-700 hover:bg-neutral-800"
                   : "bg-white text-black border-2 border-black/20 hover:border-black/40 hover:bg-neutral-50 shadow-sm"
               }`}
             >
-              Contact Me
-            </motion.button>
+              Resume
+            </motion.a>
           </motion.div>
 
           {/* Social Links - FIXED for light theme */}
@@ -285,12 +284,14 @@ export default function Home() {
               </motion.a>
 
               {/* Resume */}
+              {/* Resume */}
               <motion.a
-                href="/Mahesh_Resume.pdf"
-                download
+                href="https://docs-mahesh.s3.us-east-1.amazonaws.com/Mahesh_Reddy_Changal.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${
+                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all cursor-pointer ${
                   theme === "dark"
                     ? "bg-neutral-800/50 hover:bg-neutral-800 border border-neutral-700 text-neutral-300"
                     : "bg-white hover:bg-neutral-50 border-2 border-neutral-400 shadow-md hover:shadow-lg text-neutral-800"
@@ -373,7 +374,6 @@ export default function Home() {
       <section
         id="about"
         className="min-h-screen flex items-center justify-center px-4 md:px-8 py-20"
-        
       >
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -397,28 +397,29 @@ export default function Home() {
               }`}
             >
               <p>
-                I'm a software engineer who loves building things that work.
-                Recently completed my Master's in Computer Science at UMBC (3.6
-                GPA), where I spent a year grading code for 200+ students and
-                somehow made debugging other people's assignments entertaining.
+                Software engineer passionate about building scalable systems
+                that solve real problems. Recently completed my MS in Computer
+                Science at UMBC (3.6 GPA), where I delivered technical
+                assessments for 200+ students while sharpening my code review
+                and debugging expertise.
               </p>
 
               <p>
-                Before grad school, I spent a couple years at Tiger Analytics
-                building cloud infrastructure platforms and data pipelines.
-                Turned infrastructure-as-code into drag-and-drop UIs, migrated
-                databases across clouds without breaking things, and processed
-                more data than I care to admit. The best part? Watching users
-                deploy in minutes what used to take hours.
+                At Tiger Analytics, I architected a no-code infrastructure
+                platform that reduced deployment time by 40% for 500+ users. Led
+                cloud migrations processing 5TB+ daily data with zero downtime,
+                and built ETL pipelines that turned raw data into actionable
+                insights. Built tools that let non-technical teams ship
+                infrastructure in minutes, not hours.
               </p>
 
               <p>
-                I get excited about building software that scales—whether it's
-                distributed systems, full-stack applications, or data pipelines.
-                My code reviews are thorough, my commit messages are
-                descriptive, and yes, I actually write tests. These days, I'm
-                diving deep into the AI world, exploring how machine learning
-                can make software smarter and more useful.
+                I specialize in distributed systems, full-stack development, and
+                data engineering—with a growing focus on AI/ML applications. I
+                write clean, tested code and believe in documentation that
+                doesn't make developers cry. Currently exploring how LLMs and
+                vector databases can create smarter, more intuitive software
+                experiences.
               </p>
 
               <p
@@ -426,9 +427,9 @@ export default function Home() {
                   theme === "dark" ? "text-white" : "text-black"
                 }`}
               >
-                Looking for roles where I can build impactful software—from
-                scalable systems to AI-powered applications that people actually
-                use.
+                Open to software engineering roles where I can build
+                production-grade systems—from cloud-native architectures to
+                AI-powered applications that drive real business value.
               </p>
             </div>
 
@@ -689,8 +690,8 @@ export default function Home() {
               theme === "dark" ? "text-neutral-400" : "text-neutral-600"
             }`}
           >
-            I'm currently open to opportunities in software engineering,
-            distributed systems, and cloud architecture.
+            I'm currently open to opportunities in software engineering, Agentic
+            AI and cloud architecture.
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center pt-4">
