@@ -191,7 +191,7 @@ function CardComponent({
           </div>
 
           {/* Content */}
-          <div className="relative z-10 space-y-8 md:space-y-12">
+          <div className="relative z-10 space-y-8 md:space-y-6">
             {/* Number Badge */}
             <div
               className={`inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${card.color} text-white text-2xl md:text-3xl font-bold shadow-lg transition-all duration-500 ${
