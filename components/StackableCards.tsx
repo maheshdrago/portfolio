@@ -203,7 +203,7 @@ function CardComponent({
 
             {/* Title */}
             <h3
-              className={`text-4xl md:text-6xl lg:text-7xl font-bold leading-tight transition-all duration-700 ${
+              className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight transition-all duration-700 ${
                 theme === "dark" ? "text-white" : "text-black"
               } ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
               style={{ transitionDelay: "100ms" }}
