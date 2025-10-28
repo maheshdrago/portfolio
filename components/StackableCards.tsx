@@ -62,14 +62,7 @@ function CardComponent({
   return (
     <motion.div 
       ref={cardRef} 
-      initial={{
-        opacity:0,
-        scale:0
-      }}
-      whileInView={{
-        opacity:1,
-        scale:1
-      }}
+      
       className="h-screen flex items-center justify-center sticky top-0 px-4 md:px-8"
       style={{ zIndex: index }}
     >

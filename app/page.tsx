@@ -79,12 +79,9 @@ export default function Home() {
   };
 
   const heroRef = useRef(null);
-  const aboutRef = useRef(null);
-  const skillRef = useRef(null);
+  const aboutref = useRef(null);
 
   const isHeroInView = useInView(heroRef, { once: true });
-  const isAboutInView = useInView(aboutRef, { once: true, amount:.3 });
-  const isSkillInView = useInView(skillRef, { once: true });
 
   return (
     <main
@@ -376,7 +373,7 @@ export default function Home() {
       <section
         id="about"
         className="min-h-screen flex items-center justify-center px-4 md:px-8 py-20"
-        ref={aboutRef}
+        
       >
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -386,14 +383,13 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="space-y-12"
           >
-            
-<TextReveal 
-    text="About Me"
-    isVisible={isAboutInView}
-    className={`text-5xl md:text-7xl font-bold ${
-      theme === "dark" ? "text-white" : "text-black"
-    }`}
-  />          
+            <h2
+              className={`text-5xl md:text-7xl font-bold ${
+                theme === "dark" ? "text-white" : "text-black"
+              }`}
+            >
+              About Me
+            </h2>
 
             <div
               className={`text-xl md:text-2xl leading-relaxed space-y-6 max-w-4xl ${
@@ -575,15 +571,19 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20" >
-        <div className="max-w-6xl mx-auto px-4 md:px-8 pb-12" ref={skillRef}>
-          <TextReveal 
-  text="What I Do" 
-  isVisible={isSkillInView} 
-  className={`text-5xl md:text-7xl font-bold text-center mb-16 ${
-    theme === "dark" ? "text-white" : "text-black"
-  }`}
-/>
+      <section id="skills" className="py-20">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 pb-12">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className={`text-5xl md:text-7xl font-bold text-center mb-16 ${
+              theme === "dark" ? "text-white" : "text-black"
+            }`}
+          >
+            What I Do
+          </motion.h2>
         </div>
         <StackableCards theme={theme} />
       </section>
