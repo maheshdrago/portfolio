@@ -116,7 +116,7 @@ export default function Home() {
         {/* Floating geometric shapes */}
         <motion.div
           animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut",  type:"spring"}}
           className={`absolute top-20 right-20 w-32 h-32 rounded-3xl border-2 ${
             theme === "dark" ? "border-white/10" : "border-black/20"
           }`}
