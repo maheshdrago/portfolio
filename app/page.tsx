@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import StackableCards from "@/components/StackableCards";
@@ -73,6 +73,8 @@ const experiences = [
 
 export default function Home() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [isMobile, setIsMobile] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -82,6 +84,20 @@ export default function Home() {
   const aboutref = useRef(null);
 
   const isHeroInView = useInView(heroRef, { once: true });
+
+  // Detect mobile devices
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Disable heavy animations on mobile
+  const disableHeavyAnimations = isMobile || shouldReduceMotion;
 
   return (
     <main
@@ -113,28 +129,46 @@ export default function Home() {
           }}
         />
 
-        {/* Floating geometric shapes */}
-        <motion.div
-          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut",  type:"spring"}}
-          className={`absolute top-20 right-20 w-32 h-32 rounded-3xl border-2 ${
-            theme === "dark" ? "border-white/10" : "border-black/20"
-          }`}
-        />
-        <motion.div
-          animate={{ y: [0, 20, 0], x: [0, 10, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className={`absolute bottom-32 right-1/3 w-20 h-20 rounded-full border-2 ${
-            theme === "dark" ? "border-white/10" : "border-black/20"
-          }`}
-        />
-        <motion.div
-          animate={{ rotate: [0, 360] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className={`absolute top-1/3 right-10 w-16 h-16 border-2 ${
-            theme === "dark" ? "border-white/10" : "border-black/20"
-          }`}
-        />
+        {/* Floating geometric shapes - disabled on mobile for performance */}
+        {!disableHeavyAnimations ? (
+          <>
+            <motion.div
+              animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", type: "spring" }}
+              className={`absolute top-20 right-20 w-32 h-32 rounded-3xl border-2 ${
+                theme === "dark" ? "border-white/10" : "border-black/20"
+              }`}
+            />
+            <motion.div
+              animate={{ y: [0, 20, 0], x: [0, 10, 0] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+              className={`absolute bottom-32 right-1/3 w-20 h-20 rounded-full border-2 ${
+                theme === "dark" ? "border-white/10" : "border-black/20"
+              }`}
+            />
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className={`absolute top-1/3 right-10 w-16 h-16 border-2 ${
+                theme === "dark" ? "border-white/10" : "border-black/20"
+              }`}
+            />
+          </>
+        ) : (
+          <>
+            {/* Static shapes on mobile */}
+            <div
+              className={`absolute top-20 right-20 w-32 h-32 rounded-3xl border-2 ${
+                theme === "dark" ? "border-white/5" : "border-black/10"
+              }`}
+            />
+            <div
+              className={`absolute bottom-32 right-1/3 w-20 h-20 rounded-full border-2 ${
+                theme === "dark" ? "border-white/5" : "border-black/10"
+              }`}
+            />
+          </>
+        )}
 
         <div className="max-w-5xl w-full space-y-12 relative z-10">
           {/* Main Content */}
