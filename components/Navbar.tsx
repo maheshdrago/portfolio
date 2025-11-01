@@ -11,6 +11,7 @@ interface NavbarProps {
 export default function Navbar({ theme, toggleTheme }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,6 +19,15 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const navItems = [
@@ -109,11 +119,15 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className={`
             rounded-full px-8 py-3
-            backdrop-blur-xl backdrop-saturate-150
+            ${isMobile ? '' : 'backdrop-blur-xl backdrop-saturate-150'}
             ${
               theme === "dark"
-                ? "bg-white/5 border border-white/20 shadow-2xl shadow-white/5"
-                : "bg-white/70 border border-black/10 shadow-2xl shadow-black/10"
+                ? isMobile
+                  ? "bg-black/90 border border-white/20 shadow-2xl shadow-white/5"
+                  : "bg-white/5 border border-white/20 shadow-2xl shadow-white/5"
+                : isMobile
+                  ? "bg-white/95 border border-black/10 shadow-2xl shadow-black/10"
+                  : "bg-white/70 border border-black/10 shadow-2xl shadow-black/10"
             }
           `}
           >
@@ -222,11 +236,15 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
           >
             <div
               className={`
-              rounded-3xl p-6 backdrop-blur-xl backdrop-saturate-150
+              rounded-3xl p-6 ${isMobile ? '' : 'backdrop-blur-xl backdrop-saturate-150'}
               ${
                 theme === "dark"
-                  ? "bg-white/5 border border-white/20 shadow-2xl shadow-white/5"
-                  : "bg-white/90 border border-black/10 shadow-2xl shadow-black/10"
+                  ? isMobile
+                    ? "bg-black/95 border border-white/20 shadow-2xl shadow-white/5"
+                    : "bg-white/5 border border-white/20 shadow-2xl shadow-white/5"
+                  : isMobile
+                    ? "bg-white/98 border border-black/10 shadow-2xl shadow-black/10"
+                    : "bg-white/90 border border-black/10 shadow-2xl shadow-black/10"
               }
             `}
             >

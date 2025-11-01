@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 
 interface Card {
   id: string;
@@ -58,6 +58,20 @@ function CardComponent({
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: false, amount: 0.4, margin: "0px 0px -200px 0px" });
+  const shouldReduceMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Simplify animations on mobile
+  const simplifyAnimations = isMobile || shouldReduceMotion;
 
   return (
     <motion.div 
@@ -83,91 +97,109 @@ function CardComponent({
           {/* Gradient background */}
           <div className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-10`} />
 
-          {/* Geometric Decorations */}
+          {/* Geometric Decorations - Simplified on mobile */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {/* Large circle top right */}
-            <motion.div
-              initial={{ scale: 0, rotate: 0 }}
-              animate={isInView ? { scale: 1, rotate: 360 } : { scale: 0, rotate: 0 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-              className={`absolute -top-20 -right-20 w-64 h-64 rounded-full border-2 ${
-                theme === "dark" ? "border-white/10" : "border-black/10"
-              }`}
-            />
-
-            {/* Square bottom left */}
-            <motion.div
-              initial={{ scale: 0, rotate: 45 }}
-              animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: 45 }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: 0.1 }}
-              className={`absolute -bottom-16 -left-16 w-48 h-48 border-2 rounded-3xl ${
-                theme === "dark" ? "border-white/10" : "border-black/10"
-              }`}
-            />
-
-            {/* Small circle middle */}
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={isInView ? { scale: 1 } : { scale: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className={`absolute top-1/4 right-1/4 w-24 h-24 rounded-full border-2 ${
-                theme === "dark" ? "border-white/5" : "border-black/5"
-              }`}
-            />
-
-            {/* Triangle shape */}
-            <motion.div
-              initial={{ opacity: 0, rotate: 0 }}
-              animate={isInView ? { opacity: 1, rotate: 360 } : { opacity: 0, rotate: 0 }}
-              transition={{ duration: 1.5, ease: "easeOut", delay: 0.15 }}
-              className="absolute bottom-1/3 right-1/3"
-            >
-              <svg width="100" height="100" viewBox="0 0 100 100">
-                <polygon
-                  points="50,10 90,90 10,90"
-                  fill="none"
-                  stroke={theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}
-                  strokeWidth="2"
-                />
-              </svg>
-            </motion.div>
-
-            {/* Dots pattern */}
-            <div className="absolute top-10 left-10 flex flex-col gap-4">
-              {[...Array(5)].map((_, i) => (
+            {!simplifyAnimations ? (
+              <>
+                {/* Large circle top right */}
                 <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ duration: 0.5, delay: 0.3 + i * 0.05 }}
-                  className={`w-2 h-2 rounded-full ${
-                    theme === "dark" ? "bg-white/20" : "bg-black/20"
+                  initial={{ scale: 0, rotate: 0 }}
+                  animate={isInView ? { scale: 1, rotate: 360 } : { scale: 0, rotate: 0 }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  className={`absolute -top-20 -right-20 w-64 h-64 rounded-full border-2 ${
+                    theme === "dark" ? "border-white/10" : "border-black/10"
                   }`}
                 />
-              ))}
-            </div>
 
-            {/* Curved line */}
-            <motion.div
-              initial={{ pathLength: 0 }}
-              animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
-              transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
-              className="absolute bottom-0 right-0"
-            >
-              <svg width="200" height="200" viewBox="0 0 200 200">
-                <motion.path
-                  d="M 0 200 Q 100 100 200 0"
-                  fill="none"
-                  stroke={theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}
-                  strokeWidth="2"
+                {/* Square bottom left */}
+                <motion.div
+                  initial={{ scale: 0, rotate: 45 }}
+                  animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: 45 }}
+                  transition={{ duration: 1.2, ease: "easeOut", delay: 0.1 }}
+                  className={`absolute -bottom-16 -left-16 w-48 h-48 border-2 rounded-3xl ${
+                    theme === "dark" ? "border-white/10" : "border-black/10"
+                  }`}
+                />
+
+                {/* Small circle middle */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={isInView ? { scale: 1 } : { scale: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                  className={`absolute top-1/4 right-1/4 w-24 h-24 rounded-full border-2 ${
+                    theme === "dark" ? "border-white/5" : "border-black/5"
+                  }`}
+                />
+
+                {/* Triangle shape */}
+                <motion.div
+                  initial={{ opacity: 0, rotate: 0 }}
+                  animate={isInView ? { opacity: 1, rotate: 360 } : { opacity: 0, rotate: 0 }}
+                  transition={{ duration: 1.5, ease: "easeOut", delay: 0.15 }}
+                  className="absolute bottom-1/3 right-1/3"
+                >
+                  <svg width="100" height="100" viewBox="0 0 100 100">
+                    <polygon
+                      points="50,10 90,90 10,90"
+                      fill="none"
+                      stroke={theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}
+                      strokeWidth="2"
+                    />
+                  </svg>
+                </motion.div>
+
+                {/* Dots pattern */}
+                <div className="absolute top-10 left-10 flex flex-col gap-4">
+                  {[...Array(5)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                      transition={{ duration: 0.5, delay: 0.3 + i * 0.05 }}
+                      className={`w-2 h-2 rounded-full ${
+                        theme === "dark" ? "bg-white/20" : "bg-black/20"
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Curved line */}
+                <motion.div
                   initial={{ pathLength: 0 }}
                   animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
                   transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
+                  className="absolute bottom-0 right-0"
+                >
+                  <svg width="200" height="200" viewBox="0 0 200 200">
+                    <motion.path
+                      d="M 0 200 Q 100 100 200 0"
+                      fill="none"
+                      stroke={theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}
+                      strokeWidth="2"
+                      initial={{ pathLength: 0 }}
+                      animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
+                      transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
+                    />
+                  </svg>
+                </motion.div>
+              </>
+            ) : (
+              <>
+                {/* Simplified mobile decorations - only 2 static shapes */}
+                <div
+                  className={`absolute -top-20 -right-20 w-64 h-64 rounded-full border-2 ${
+                    theme === "dark" ? "border-white/5" : "border-black/5"
+                  }`}
                 />
-              </svg>
-            </motion.div>
+                <div
+                  className={`absolute -bottom-16 -left-16 w-48 h-48 border-2 rounded-3xl ${
+                    theme === "dark" ? "border-white/5" : "border-black/5"
+                  }`}
+                />
+              </>
+            )}
 
-            {/* Grid lines */}
+            {/* Grid lines - always static */}
             <div className="absolute inset-0" style={{ opacity: 0.03 }}>
               <div
                 className="w-full h-full"
@@ -181,13 +213,17 @@ function CardComponent({
               />
             </div>
 
-            {/* Gradient orb */}
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className={`absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-gradient-to-br ${card.color} opacity-20 blur-3xl`}
-            />
+            {/* Gradient orb - simpler on mobile */}
+            {!simplifyAnimations ? (
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                className={`absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-gradient-to-br ${card.color} opacity-20 blur-3xl`}
+              />
+            ) : (
+              <div className={`absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-gradient-to-br ${card.color} opacity-10 blur-3xl`} />
+            )}
           </div>
 
           {/* Content */}

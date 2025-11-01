@@ -1,21 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 interface BackgroundPatternProps {
   theme: "dark" | "light";
 }
 
 export default function BackgroundPattern({ theme }: BackgroundPatternProps) {
+  const shouldReduceMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Detect mobile devices
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Disable animations on mobile or when reduced motion is preferred
+  const disableAnimations = isMobile || shouldReduceMotion;
+
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
       {/* Static gradient orbs - no animation */}
-      <div 
+      <div
         className={`absolute top-0 right-0 w-[800px] h-[800px] rounded-full blur-[150px] ${
           theme === "dark" ? "bg-blue-600/20" : "bg-blue-500/30"
         }`}
       />
-      <div 
+      <div
         className={`absolute bottom-0 left-0 w-[900px] h-[900px] rounded-full blur-[150px] ${
           theme === "dark" ? "bg-purple-600/20" : "bg-purple-500/30"
         }`}
@@ -42,30 +60,34 @@ export default function BackgroundPattern({ theme }: BackgroundPatternProps) {
         }}
       />
 
-      {/* Only 3 slow floating shapes */}
-      <motion.div
-        animate={{ y: [0, -30, 0], rotate: [0, 360] }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className={`absolute top-20 left-1/4 w-32 h-32 border rounded-3xl ${
-          theme === "dark" ? "border-white/5" : "border-black/5"
-        }`}
-      />
+      {/* Floating shapes - disabled on mobile for performance */}
+      {!disableAnimations && (
+        <>
+          <motion.div
+            animate={{ y: [0, -30, 0], rotate: [0, 360] }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className={`absolute top-20 left-1/4 w-32 h-32 border rounded-3xl ${
+              theme === "dark" ? "border-white/5" : "border-black/5"
+            }`}
+          />
 
-      <motion.div
-        animate={{ y: [0, 40, 0], rotate: [0, -360] }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        className={`absolute bottom-32 right-1/3 w-40 h-40 border rounded-full ${
-          theme === "dark" ? "border-white/5" : "border-black/5"
-        }`}
-      />
+          <motion.div
+            animate={{ y: [0, 40, 0], rotate: [0, -360] }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className={`absolute bottom-32 right-1/3 w-40 h-40 border rounded-full ${
+              theme === "dark" ? "border-white/5" : "border-black/5"
+            }`}
+          />
 
-      <motion.div
-        animate={{ y: [0, -50, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className={`absolute top-1/2 right-20 w-24 h-24 rounded-full border ${
-          theme === "dark" ? "border-white/5" : "border-black/5"
-        }`}
-      />
+          <motion.div
+            animate={{ y: [0, -50, 0] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className={`absolute top-1/2 right-20 w-24 h-24 rounded-full border ${
+              theme === "dark" ? "border-white/5" : "border-black/5"
+            }`}
+          />
+        </>
+      )}
 
       {/* Radial vignette */}
       <div
