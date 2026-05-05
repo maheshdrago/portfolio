@@ -287,7 +287,7 @@ export default function Home() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               download
-              href="/Mahesh_Reddy_Changal_Resume.pdf"
+              href="/Mahesh_Reddy_Changal_Resume_2026.pdf"
               target="_blank"
               className={`px-8 py-4 rounded-xl font-medium transition-colors ${
                 theme === "dark"
@@ -361,7 +361,7 @@ export default function Home() {
 
               {/* Resume */}
               <motion.a
-                href="/Mahesh_Reddy_Changal_Resume.pdf"
+                href="/Mahesh_Reddy_Changal_Resume_2026.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 download
@@ -803,7 +803,6 @@ export default function Home() {
     </main>
   );
 }
-
 
 
 
