@@ -360,21 +360,21 @@ export default function Home() {
               </motion.a>
 
               {/* Resume */}
-              {/* Resume */}
               <motion.a
                 href="/Mahesh_Reddy_Changal_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
+                download
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all cursor-pointer ${
+                className={`px-4 h-12 rounded-xl flex items-center gap-2 transition-all cursor-pointer text-sm font-semibold ${
                   theme === "dark"
                     ? "bg-neutral-800/50 hover:bg-neutral-800 border border-neutral-700 text-neutral-300"
                     : "bg-white hover:bg-neutral-50 border-2 border-neutral-400 shadow-md hover:shadow-lg text-neutral-800"
                 }`}
               >
                 <svg
-                  className="w-6 h-6"
+                  className="w-4 h-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -386,6 +386,7 @@ export default function Home() {
                     d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                   />
                 </svg>
+                Resume
               </motion.a>
 
               {/* Email */}
