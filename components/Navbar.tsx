@@ -33,8 +33,8 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
   const navItems = [
     "Home",
     "About",
-    "Projects",
     "Skills",
+    "Projects",
     "Experience",
     "Contact",
   ];
@@ -42,8 +42,8 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
   const mobileMenuItems = [
     { name: "Home", icon: "home" },
     { name: "About", icon: "user" },
-    { name: "Projects", icon: "folder" },
     { name: "Skills", icon: "code" },
+    { name: "Projects", icon: "folder" },
     { name: "Experience", icon: "briefcase" },
     { name: "Contact", icon: "mail" },
   ];

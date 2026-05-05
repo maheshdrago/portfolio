@@ -6,9 +6,14 @@ import { useState } from "react";
 interface ProjectCardProps {
   project: {
     title: string;
+    subtitle?: string;
     description: string;
     tags: string[];
     gradient: string;
+    href?: string;
+    status?: string;
+    impact?: string;
+    highlights?: string[];
   };
   index: number;
   theme: "dark" | "light";
@@ -75,6 +80,18 @@ export default function ProjectCard({ project, index, theme }: ProjectCardProps)
 
         {/* Content */}
         <div className="relative z-10">
+          {project.status && (
+            <span
+              className={`inline-flex mb-4 text-xs font-semibold px-3 py-1 rounded-full ${
+                theme === "dark"
+                  ? "bg-white/10 text-neutral-200 border border-white/20"
+                  : "bg-black/10 text-neutral-700 border border-black/20"
+              }`}
+            >
+              {project.status}
+            </span>
+          )}
+
           <motion.h3
             className={`text-2xl font-bold mb-3 ${
               theme === "dark" ? "text-white" : "text-black"
@@ -84,6 +101,16 @@ export default function ProjectCard({ project, index, theme }: ProjectCardProps)
           >
             {project.title}
           </motion.h3>
+
+          {project.subtitle && (
+            <p
+              className={`mb-3 text-sm font-medium ${
+                theme === "dark" ? "text-blue-300" : "text-blue-700"
+              }`}
+            >
+              {project.subtitle}
+            </p>
+          )}
           
           <motion.p
             className={`mb-4 ${
@@ -94,6 +121,32 @@ export default function ProjectCard({ project, index, theme }: ProjectCardProps)
           >
             {project.description}
           </motion.p>
+
+          {project.impact && (
+            <p
+              className={`mb-4 text-sm font-semibold ${
+                theme === "dark" ? "text-neutral-200" : "text-neutral-800"
+              }`}
+            >
+              Impact: {project.impact}
+            </p>
+          )}
+
+          {project.highlights?.length ? (
+            <ul className="mb-5 space-y-2">
+              {project.highlights.map((item) => (
+                <li
+                  key={item}
+                  className={`text-sm flex gap-2 ${
+                    theme === "dark" ? "text-neutral-400" : "text-neutral-600"
+                  }`}
+                >
+                  <span className="text-blue-500 mt-0.5">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
 
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag, i) => (
@@ -113,6 +166,24 @@ export default function ProjectCard({ project, index, theme }: ProjectCardProps)
               </motion.span>
             ))}
           </div>
+
+          {project.href && (
+            <motion.a
+              href={project.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className={`mt-6 inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-xl transition-all ${
+                theme === "dark"
+                  ? "bg-white text-black hover:bg-neutral-200"
+                  : "bg-black text-white hover:bg-neutral-800"
+              }`}
+            >
+              View Project
+              <span aria-hidden="true">↗</span>
+            </motion.a>
+          )}
         </div>
 
         {/* Corner Accent */}

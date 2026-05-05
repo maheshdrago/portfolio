@@ -1,0 +1,6 @@
+[    2855ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://127.0.0.1:3000/_next/static/chunks/0k5x_next_dist_0zb8~4e._.js:2431
+[    2966ms] [LOG] [HMR] connected @ http://127.0.0.1:3000/_next/static/chunks/0k5x_next_dist_0zb8~4e._.js:2431
+[    3140ms] [LOG] [Fast Refresh] rebuilding @ http://127.0.0.1:3000/_next/static/chunks/0k5x_next_dist_0zb8~4e._.js:2431
+[    3183ms] [LOG] [Fast Refresh] done in 155ms @ http://127.0.0.1:3000/_next/static/chunks/0k5x_next_dist_0zb8~4e._.js:2431
+[    3348ms] [ERROR] Access to fetch at 'http://localhost:8000/api/idea-cards' from origin 'http://127.0.0.1:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://127.0.0.1:3000/:0
+[    3349ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/idea-cards:0

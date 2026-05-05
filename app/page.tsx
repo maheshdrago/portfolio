@@ -7,67 +7,108 @@ import StackableCards from "@/components/StackableCards";
 import BackgroundPattern from "@/components/BackgroundPattern";
 import ProjectCard from "@/components/ProjectCard";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
-import TextReveal from "@/components/TextReveal";
 
-const projects = [
+const portfolioProjects = [
   {
-    title: "AI-Powered Icon Generation Platform",
+    title: "Value Stream RAG Pipeline",
+    subtitle: "Enterprise Jira + Idea Card Intelligence",
     description:
-      "Customer-facing AI platform generating custom icons from user prompts via DALL·E API, processing 10,000+ daily requests and generating $50K+ revenue.",
-    tags: ["Node.js", "React", "DALL·E API", "AWS", "Stripe"],
+      "Retrieval-first RAG system that predicts impacted value streams from Jira idea cards by combining semantic value-stream retrieval, historical FAISS ticket retrieval, candidate merging, and an LLM finalizer that selects only from real bounded candidates.",
+    tags: ["Python", "FastAPI", "FAISS", "Azure AI Search", "RAG", "LLM Evaluation"],
     gradient: "from-blue-500 to-cyan-500",
+    href: "https://github.com/Soul-Eater69/vs",
+    status: "Enterprise RAG",
+    impact: "Semantic + historical retrieval",
+    highlights: [
+      "Merges semantic and historical evidence by value-stream name",
+      "Uses historical ticket precedent to improve recall",
+      "Constrains the LLM to choose only from retrieved candidates",
+    ],
   },
   {
-    title: "Distributed File System",
+    title: "PaperMind",
+    subtitle: "RAG Document Intelligence",
     description:
-      "Fault-tolerant distributed file system inspired by Google File System with 99.9% availability and zero data loss during node failures.",
-    tags: ["Python", "gRPC", "Docker", "Distributed Systems"],
+      "Full-stack document intelligence app for PDF ingestion, chunking, vector storage, and contextual Q&A using LangChain-style retrieval flows, FastAPI backend services, and a React frontend.",
+    tags: ["Python", "FastAPI", "React", "LangChain", "ChromaDB", "Azure AI Search"],
     gradient: "from-purple-500 to-pink-500",
+    href: "https://github.com/Soul-Eater69/pdfRag",
+    status: "RAG App",
+    impact: "PDF Q&A with citations-ready retrieval",
+    highlights: [
+      "PDF ingestion and text extraction pipeline",
+      "Chunking and vector-search based retrieval",
+      "Reusable pattern for document Q&A systems",
+    ],
   },
   {
-    title: "P2P File Sharing System",
+    title: "ContextForge",
+    subtitle: "Codebase-to-Knowledge Engine",
     description:
-      "Decentralized network for secure file sharing supporting 1,000+ concurrent users with end-to-end encryption and 95% success rate.",
-    tags: ["TypeScript", "WebSockets", "Encryption", "DHT"],
+      "Codebase intelligence project focused on converting repositories into structured, searchable context for LLM workflows, reducing manual code dumping and improving repository understanding.",
+    tags: ["Python", "Code Search", "Embeddings", "Graph Thinking", "LLM Context", "Developer Tools"],
     gradient: "from-orange-500 to-red-500",
+    href: "https://github.com/Soul-Eater69/contextForge",
+    status: "In Progress",
+    impact: "Reduce token-heavy repo analysis",
+    highlights: [
+      "Repository-aware context generation",
+      "Designed for LLM coding assistants",
+      "Foundation for graph + vector code knowledge base",
+    ],
   },
   {
-    title: "Real-Time Chat Application",
+    title: "Code Summarizer",
+    subtitle: "LLM-Assisted Repository Summaries",
     description:
-      "High-performance chat app supporting 5,000+ concurrent users with sub-100ms latency and 99.9% message delivery rate.",
-    tags: ["TypeScript", "Node.js", "Socket.IO", "Redis", "Kafka"],
+      "Developer tool for summarizing source code and producing compact codebase context that can be reused by LLM agents, reviewers, and documentation workflows.",
+    tags: ["TypeScript", "Python", "LLM Tools", "MCP", "Summarization", "Developer Productivity"],
     gradient: "from-green-500 to-teal-500",
+    href: "https://github.com/Soul-Eater69/Code-summarizer",
+    status: "In Progress",
+    impact: "Faster codebase understanding",
+    highlights: [
+      "Summarizes files and repository structure",
+      "Useful for onboarding and AI-assisted development",
+      "Can evolve into an MCP/code-context service",
+    ],
   },
 ];
 
-const experiences = [
+const portfolioExperiences = [
+  {
+    role: "Software Engineer II - AI/Cloud Solutions",
+    company: "Tiger Analytics",
+    year: "Jan 2026 - Present",
+    location: "Chicago, IL",
+    description:
+      "Building production AI and cloud systems for enterprise workflows using RAG, agentic orchestration, and Azure AI services.",
+    highlights: [
+      "Built LangChain/LangGraph workflows with Azure AI Search and Azure OpenAI",
+      "Created technical design documents from ambiguous customer requirements",
+      "Owned production reliability through monitoring, debugging, and DRI/on-call practices",
+    ],
+  },
   {
     role: "Graduate Assistant & Grader",
     company: "University of Maryland, Baltimore County",
     year: "Aug 2024 - May 2025",
     description:
-      "Delivered technical assessments for 200+ students, improving code quality awareness by 35% through targeted feedback on Data Science and Network Security courses.",
+      "Reviewed Python, Java, and C++ coursework for 200+ students across Data Science and Network Security, created evaluation rubrics, and mentored students on algorithms, debugging, and software engineering practices.",
   },
   {
-    role: "Senior Software Engineer",
+    role: "Senior Software Engineer / Data Engineer",
     company: "Tiger Analytics",
-    year: "June 2022 - July 2023",
+    year: "Nov 2021 - July 2023",
     description:
-      "Architected no-code Terraform automation platform using React and Flask, empowering 500+ users and reducing deployment time by 40%.",
-  },
-  {
-    role: "Data Engineer",
-    company: "Tiger Analytics",
-    year: "Nov 2021 - May 2022",
-    description:
-      "Led end-to-end migration from Azure to GCP, processing 5TB+ daily data with 25% cost reduction and 99.9% uptime.",
+      "Built full-stack platforms, cloud automation tools, ETL pipelines, and large-scale data workflows across React, Flask, Spark, Airflow, Databricks, AWS, Azure, and GCP. Contributed to migration and automation work that improved delivery speed and reduced platform overhead.",
   },
   {
     role: "Research Intern",
     company: "ICRISAT",
     year: "June 2019 - July 2019",
     description:
-      "Developed ML model using TensorFlow to predict optimal fertilizer application rates, improving efficiency by 15%.",
+      "Built ML and web application prototypes using TensorFlow, Pandas, NumPy, Django, React, and AWS to support agricultural decision-making and field research workflows.",
   },
 ];
 
@@ -189,7 +230,7 @@ export default function Home() {
                   : "bg-white/80 text-neutral-700 border border-neutral-300 shadow-sm"
               }`}
             >
-              <span>👋</span>
+              <span>Hello</span>
               <span>Welcome to my portfolio</span>
             </motion.div>
 
@@ -218,8 +259,9 @@ export default function Home() {
                 theme === "dark" ? "text-neutral-400" : "text-neutral-600"
               }`}
             >
-              Software Engineer specializing in distributed systems, Agentic AI
-              systems and full-stack development
+              AI-focused Software Engineer building production RAG systems, agentic workflows,
+              cloud-native platforms, and full-stack applications across Azure, AWS, Python,
+              FastAPI, React, and modern LLM tooling.
             </motion.p>
           </motion.div>
 
@@ -245,7 +287,7 @@ export default function Home() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               download
-              href="https://docs-mahesh.s3.us-east-1.amazonaws.com/Mahesh_Reddy_Changal.pdf"
+              href="/Mahesh_Reddy_Changal_Resume.pdf"
               target="_blank"
               className={`px-8 py-4 rounded-xl font-medium transition-colors ${
                 theme === "dark"
@@ -275,7 +317,7 @@ export default function Home() {
             <div className="flex gap-4">
               {/* GitHub */}
               <motion.a
-                href="https://github.com/maheshdrago"
+                href="https://github.com/Soul-Eater69"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
@@ -320,7 +362,7 @@ export default function Home() {
               {/* Resume */}
               {/* Resume */}
               <motion.a
-                href="https://docs-mahesh.s3.us-east-1.amazonaws.com/Mahesh_Reddy_Changal.pdf"
+                href="/Mahesh_Reddy_Changal_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
@@ -431,49 +473,45 @@ export default function Home() {
               }`}
             >
               <p>
-                Software engineer passionate about building scalable systems
-                that solve real problems. Recently completed my MS in Computer
-                Science at UMBC (3.6 GPA), where I delivered technical
-                assessments for 200+ students while sharpening my code review
-                and debugging expertise.
+                I am a Software Engineer II focused on production AI, RAG systems,
+                full-stack engineering, and cloud platforms. I recently completed my MS in
+                Computer Science at UMBC with a 3.7 GPA, while working as a Graduate
+                Assistant reviewing code and mentoring students across programming and
+                security-focused coursework.
               </p>
 
               <p>
-                At Tiger Analytics, I architected a no-code infrastructure
-                platform that reduced deployment time by 40% for 500+ users. Led
-                cloud migrations processing 5TB+ daily data with zero downtime,
-                and built ETL pipelines that turned raw data into actionable
-                insights. Built tools that let non-technical teams ship
-                infrastructure in minutes, not hours.
+                At Tiger Analytics, I work on AI and cloud solutions involving LangChain,
+                LangGraph, Azure AI Search, Azure OpenAI, and enterprise RAG workflows. My
+                work includes turning ambiguous customer requirements into technical designs,
+                building retrieval and agentic pipelines, and supporting production reliability
+                through monitoring, debugging, and ownership.
               </p>
 
               <p>
-                I specialize in distributed systems, full-stack development, and
-                data engineering—with a growing focus on AI/ML applications. I
-                write clean, tested code and believe in documentation that
-                doesn't make developers cry. Currently exploring how LLMs and
-                vector databases can create smarter, more intuitive software
-                experiences.
+                Earlier at Tiger Analytics, I built full-stack platforms, cloud automation
+                tools, ETL pipelines, and large-scale data workflows across React, Flask,
+                Spark, Airflow, Databricks, AWS, Azure, and GCP. I like building systems that
+                are useful, maintainable, and easy for other engineers to extend.
               </p>
-
               <p
                 className={`text-2xl md:text-3xl font-semibold pt-4 ${
                   theme === "dark" ? "text-white" : "text-black"
                 }`}
               >
-                Open to software engineering roles where I can build
-                production-grade systems—from cloud-native architectures to
-                AI-powered applications that drive real business value.
+                I am interested in AI/ML engineering, full-stack engineering, backend systems,
+                and cloud roles where I can build production-grade software with real business
+                impact.
               </p>
             </div>
 
             {/* Clean Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12">
               {[
-                { stat: "3.6", label: "GPA", sublabel: "UMBC" },
-                { stat: "3+", label: "Years", sublabel: "Experience" },
-                { stat: "40%", label: "Faster", sublabel: "Deployments" },
-                { stat: "10+", label: "Projects", sublabel: "Shipped" },
+                { stat: "3.7", label: "GPA", sublabel: "UMBC MS CS" },
+                { stat: "3+", label: "Years", sublabel: "Engineering" },
+                { stat: "5TB+", label: "Daily Data", sublabel: "Pipeline Scale" },
+                { stat: "500+", label: "Users", sublabel: "Platform Impact" },
               ].map((item, index) => (
                 <motion.div
                   key={item.label}
@@ -580,7 +618,7 @@ export default function Home() {
                 }`}
               >
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="font-medium">Open to Opportunities</span>
+                <span className="font-medium">Open to AI / Full-Stack Roles</span>
               </div>
               <div
                 className={`px-6 py-3 rounded-full ${
@@ -589,7 +627,7 @@ export default function Home() {
                     : "bg-black/5 border border-black/20 text-neutral-700"
                 }`}
               >
-                <span className="font-medium">Baltimore, MD</span>
+                <span className="font-medium">Chicago, IL</span>
               </div>
               <div
                 className={`px-6 py-3 rounded-full ${
@@ -598,7 +636,7 @@ export default function Home() {
                     : "bg-black/5 border border-black/20 text-neutral-700"
                 }`}
               >
-                <span className="font-medium">UMBC • MS in CS</span>
+                <span className="font-medium">UMBC MS CS - 3.7 GPA</span>
               </div>
             </motion.div>
           </motion.div>
@@ -642,7 +680,7 @@ export default function Home() {
           </motion.h2>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
+            {portfolioProjects.map((project, index) => (
               <ProjectCard
                 key={project.title}
                 project={project}
@@ -672,7 +710,7 @@ export default function Home() {
             Experience
           </motion.h2>
 
-          <ExperienceTimeline experiences={experiences} theme={theme} />
+          <ExperienceTimeline experiences={portfolioExperiences} theme={theme} />
         </div>
       </section>
 
@@ -715,7 +753,7 @@ export default function Home() {
               theme === "dark" ? "text-white" : "text-black"
             }`}
           >
-            Let's Work
+            Let&apos;s Work
             <br />
             Together
           </h2>
@@ -724,8 +762,9 @@ export default function Home() {
               theme === "dark" ? "text-neutral-400" : "text-neutral-600"
             }`}
           >
-            I'm currently open to opportunities in software engineering, Agentic
-            AI and cloud architecture.
+            I&apos;m open to AI/ML engineering, full-stack engineering, backend, and cloud roles
+            where I can build production RAG systems, agentic workflows, and scalable
+            customer-facing platforms.
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center pt-4">
@@ -756,10 +795,14 @@ export default function Home() {
               theme === "dark" ? "text-neutral-600" : "text-neutral-500"
             }`}
           >
-            (667) 433-1954 • mahesh6273766@gmail.com
+            (667) 433-1954 - mahesh6273766@gmail.com
           </div>
         </motion.div>
       </section>
     </main>
   );
 }
+
+
+
+

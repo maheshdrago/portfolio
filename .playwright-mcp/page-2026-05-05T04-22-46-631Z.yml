@@ -1,0 +1,63 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img [ref=e7]
+          - generic [ref=e11]:
+            - heading "Value Stream Explorer" [level=1] [ref=e12]
+            - paragraph [ref=e13]: Idea-card value stream retrieval
+        - button "Switch to light mode" [ref=e14]:
+          - img [ref=e15]
+          - text: Light
+    - generic [ref=e19]:
+      - complementary [ref=e20]:
+        - generic [ref=e21]:
+          - generic [ref=e23]:
+            - img [ref=e25]
+            - generic [ref=e29]: Input
+          - generic [ref=e31]:
+            - combobox [ref=e32]
+            - button "Drop idea card here PPTX, PDF, DOCX, TXT, or Markdown Browse file" [ref=e33] [cursor=pointer]:
+              - img [ref=e35]
+              - generic [ref=e38]: Drop idea card here
+              - generic [ref=e39]: PPTX, PDF, DOCX, TXT, or Markdown
+              - generic [ref=e40]: Browse file
+        - generic [ref=e41]:
+          - generic [ref=e43]:
+            - img [ref=e45]
+            - generic [ref=e47]: Config
+          - generic [ref=e49]:
+            - generic [ref=e50]:
+              - generic [ref=e51]:
+                - generic [ref=e52]: Historical RAG Candidates
+                - generic [ref=e53]: "20"
+              - slider [ref=e54]: "20"
+              - paragraph [ref=e55]: Historical RAG can surface up to 50 value-stream candidates before the merge.
+            - generic [ref=e56]:
+              - generic [ref=e57]:
+                - generic [ref=e58]: Exclude source ticket
+                - generic [ref=e59]: No ticket key selected
+              - checkbox "Exclude source ticket No ticket key selected" [checked] [ref=e60]
+            - button "Run Historical RAG" [disabled] [ref=e61]:
+              - img [ref=e62]
+              - text: Run Historical RAG
+      - main [ref=e64]:
+        - generic [ref=e65]:
+          - generic [ref=e66]:
+            - generic [ref=e67]:
+              - img [ref=e69]
+              - generic [ref=e74]: Pipeline
+            - generic [ref=e75]: idle
+          - application [ref=e78]:
+            - generic [ref=e80]:
+              - generic:
+                - generic:
+                  - img
+            - img
+        - generic [ref=e82]:
+          - img [ref=e84]
+          - heading "Ready" [level=3] [ref=e88]
+          - paragraph [ref=e89]: Select an idea card and run historical RAG to retrieve candidates, merge historical support, and predict value streams.
+  - button "Open Next.js Dev Tools" [ref=e95] [cursor=pointer]:
+    - img [ref=e96]

@@ -6,7 +6,9 @@ interface Experience {
   role: string;
   company: string;
   year: string;
+  location?: string;
   description: string;
+  highlights?: string[];
 }
 
 interface ExperienceTimelineProps {
@@ -64,13 +66,28 @@ export default function ExperienceTimeline({ experiences, theme }: ExperienceTim
                       <p className={`text-base mb-4 ${
                         theme === "dark" ? "text-neutral-400" : "text-neutral-600"
                       }`}>
-                        {exp.company}
+                        {exp.company}{exp.location ? ` - ${exp.location}` : ""}
                       </p>
                       <p className={`text-base leading-relaxed ${
                         theme === "dark" ? "text-neutral-500" : "text-neutral-600"
                       }`}>
                         {exp.description}
                       </p>
+                      {exp.highlights?.length ? (
+                        <ul className="mt-4 space-y-2">
+                          {exp.highlights.map((item) => (
+                            <li
+                              key={item}
+                              className={`text-sm flex gap-2 justify-end ${
+                                theme === "dark" ? "text-neutral-500" : "text-neutral-600"
+                              }`}
+                            >
+                              <span>{item}</span>
+                              <span className="text-blue-500">-</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
                     </motion.div>
                     <div /> {/* Empty space on right */}
                   </>
@@ -101,13 +118,28 @@ export default function ExperienceTimeline({ experiences, theme }: ExperienceTim
                       <p className={`text-base mb-4 ${
                         theme === "dark" ? "text-neutral-400" : "text-neutral-600"
                       }`}>
-                        {exp.company}
+                        {exp.company}{exp.location ? ` - ${exp.location}` : ""}
                       </p>
                       <p className={`text-base leading-relaxed ${
                         theme === "dark" ? "text-neutral-500" : "text-neutral-600"
                       }`}>
                         {exp.description}
                       </p>
+                      {exp.highlights?.length ? (
+                        <ul className="mt-4 space-y-2">
+                          {exp.highlights.map((item) => (
+                            <li
+                              key={item}
+                              className={`text-sm flex gap-2 ${
+                                theme === "dark" ? "text-neutral-500" : "text-neutral-600"
+                              }`}
+                            >
+                              <span className="text-blue-500">-</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
                     </motion.div>
                   </>
                 )}
@@ -139,13 +171,28 @@ export default function ExperienceTimeline({ experiences, theme }: ExperienceTim
                   <p className={`text-sm mb-4 ${
                     theme === "dark" ? "text-neutral-400" : "text-neutral-600"
                   }`}>
-                    {exp.company}
+                    {exp.company}{exp.location ? ` - ${exp.location}` : ""}
                   </p>
                   <p className={`text-sm leading-relaxed ${
                     theme === "dark" ? "text-neutral-500" : "text-neutral-600"
                   }`}>
                     {exp.description}
                   </p>
+                  {exp.highlights?.length ? (
+                    <ul className="mt-4 space-y-2">
+                      {exp.highlights.map((item) => (
+                        <li
+                          key={item}
+                          className={`text-sm flex gap-2 ${
+                            theme === "dark" ? "text-neutral-500" : "text-neutral-600"
+                          }`}
+                        >
+                          <span className="text-blue-500">-</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </motion.div>
               </div>
 
